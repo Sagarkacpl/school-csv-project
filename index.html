@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Process and Audit Management Dashboard</title>
+  <!-- Bootstrap 5 -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="./assets/js/chart.umd.min.js"></script>
+
+  <script src="./assets/js/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container-fluid py-3 app-shell">
+    <!-- Top Brand Bar -->
+    <div class="brandbar mb-3 px-3 py-2 d-flex align-items-center justify-content-between">
+      <h1 class="mb-0">Process and Audit Management Dashboard</h1>
+      <!-- <div>
+        <button class="btn btn-sm btn-light me-2"><i class="bi bi-funnel"></i> Filters</button>
+        <button class="btn btn-sm btn-outline-light"><i class="bi bi-download"></i> Export</button>
+      </div> -->
+    </div>
+
+    <div class="row g-3">
+      <!-- MAIN BODY -->
+      <div class="col-lg-10 col-12">
+        <div class="row g-3">
+          <!-- Heatmap + KPI -->
+          <div class="col-md-7">
+            <div class="card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Audit Risk Rating</span>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered heatmap mb-0">
+                    <thead>
+                      <tr>
+                        <th style="width:30%"></th>
+                        <th>Jan-25</th>
+                        <th>Feb-25</th>
+                        <th>Mar-25</th>
+                        <th>Apr-25</th>
+                        <th>May-25</th>
+                        <th>Jun-25</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Fraud</th>
+                        <td class="cell c-5">5.00</td>
+                        <td class="cell c-0">-</td>
+                        <td class="cell c-0">-</td>
+                        <td class="cell c-0">-</td>
+                        <td class="cell c-5">5.00</td>
+                        <td class="cell c-5">5.00</td>
+                        <td class="cell c-5">5.00</td>
+                      </tr>
+                      <tr>
+                        <th>Lack of Training</th>
+                        <td class="cell c-4">4.00</td>
+                        <td class="cell c-2">3.00</td>
+                        <td class="cell c-3">3.80</td>
+                        <td class="cell c-2">2.25</td>
+                        <td class="cell c-1">1.33</td>
+                        <td class="cell c-2">2.50</td>
+                        <td class="cell c-2">2.53</td>
+                      </tr>
+                      <tr>
+                        <th>None</th>
+                        <td class="cell c-1">2.00</td>
+                        <td class="cell c-1">1.00</td>
+                        <td class="cell c-2">3.00</td>
+                        <td class="cell c-2">3.00</td>
+                        <td class="cell c-3">3.50</td>
+                        <td class="cell c-1">2.00</td>
+                        <td class="cell c-2">2.33</td>
+                      </tr>
+                      <tr>
+                        <th>System Glitch</th>
+                        <td class="cell c-3">3.75</td>
+                        <td class="cell c-2">2.33</td>
+                        <td class="cell c-2">3.00</td>
+                        <td class="cell c-2">2.20</td>
+                        <td class="cell c-2">2.25</td>
+                        <td class="cell c-2">3.00</td>
+                        <td class="cell c-2">2.77</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center justify-content-center flex-column">
+                <div class="text-center">
+                  <div class="kpi">2.77</div>
+                  <div class="muted">Audit Risk Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <span>Department</span>
+                <span class="text-muted"><i class="bi bi-funnel"></i></span>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-compact scroll-y">
+                  <div class="list-group-item">Accounting</div>
+                  <div class="list-group-item">Accounts Payable</div>
+                  <div class="list-group-item">Accounts Receivable</div>
+                  <div class="list-group-item">Credit &amp; Collections</div>
+                  <div class="list-group-item">Payroll</div>
+                  <div class="list-group-item">Audit</div>
+                  <div class="list-group-item">Finance</div>
+                  <div class="list-group-item">Risk &amp; Compliance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assistant / Notes + Efficiency -->
+          <div class="col-xl-3 col-lg-5">
+            <div class="card h-100">
+              <div class="card-header">Feel Free to Ask Any Finance Questions</div>
+              <div class="card-body">
+                <div class="scroll-y">
+                  <p class="mb-2">Cars should be booked as a fixed asset on the balance sheet. This means that the value
+                    of the car should be recorded under the "property, plant, and equipment" section of the balance
+                    sheet as a non‑current asset.</p>
+                  <p class="mb-2">The value of the car should be recorded at its original purchase price minus any
+                    accumulated depreciation. This asset should be periodically reviewed and adjusted for depreciation
+                    according to the accounting standards and company policies.</p>
+                </div>
+                <div class="d-flex align-items-center mt-3">
+                  <button type="button" class="btn btn-primary mb-2"><i class="bi bi-robot"></i> Fincha Bot</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6 col-lg-5">
+            <div class="card">
+              <div class="card-header">Change in working capital</div>
+              <div class="card-body">
+                <canvas id="workingCapitalChart"></canvas>
+                <ul class="list-unstyled text-center">
+                  <li class="mb-2"><span class="badge bg-secondary">&nbsp;</span> Working Capital:
+                    <strong>22,868K</strong>
+                  </li>
+                  <li class="mb-2"><span class="badge bg-primary">&nbsp;</span> Current Asset:
+                    <strong>25,139K</strong>
+                  </li>
+                  <li><span class="badge bg-info">&nbsp;</span> Current Liability: <strong>(2,271K)</strong></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card mt-3">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade active show" id="bar-chart-1" role="tabpanel"
+                      aria-labelledby="bar-chart-tab">
+                      <div class="p-3">
+                        <canvas id="lineDelay" height="110"></canvas>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="bar-chart-2" role="tabpanel" aria-labelledby="bar-chart-2">
+                      2222222
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <nav>
+                    <div class="nav nav-tabs mb-3 mt-2 border-0" id="nav-tab" role="tablist">
+                      <button class="nav-link active" id="bar-chart-tab" data-bs-toggle="tab"
+                        data-bs-target="#bar-chart-1" type="button" role="tab" aria-controls="bar-chart-1"
+                        aria-selected="true">AP</button>
+                      <button class="nav-link" id="bar-chart-tab" data-bs-toggle="tab" data-bs-target="#bar-chart-2"
+                        type="button" role="tab" aria-controls="bar-chart-2" aria-selected="false">AR</button>
+                      <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                      </p>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+
+          <div class="col-xl-3 col-lg-3">
+            <div class="card">
+              <div class="card-header">Inventory</div>
+              <div class="card-body text-center">
+
+                <nav>
+                  <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                      type="button" role="tab" aria-controls="nav-home" aria-selected="true">Allocation</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                      type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ageing</button>
+                  </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <p class="mb-0">Food</p>
+                        <p class="fw-bold">193.96K</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="mb-0">Beverage</p>
+                        <p class="fw-bold">274.74K</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="mb-0">Other</p>
+                        <p class="fw-bold">52.95K</p>
+                      </div>
+                    </div>
+                    <div id="sunburstChart" style="height:250px;"></div>
+                  </div>
+                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <p class="mb-0">Food</p>
+                        <p class="fw-bold">193.96K</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="mb-0">Beverage</p>
+                        <p class="fw-bold">274.74K</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="mb-0">Other</p>
+                        <p class="fw-bold">52.95K</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="col-lg-2 col-12 sidebar">
+        <div class="row g-3">
+          <!-- Departments -->
+          <div class="col-12">
+            <div class="card h-100">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <span>Month</span>
+                <span class="text-muted"><i class="bi bi-funnel"></i></span>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-compact">
+                  <div class="list-group-item">Jan</div>
+                  <div class="list-group-item">Feb</div>
+                  <div class="list-group-item">Mar</div>
+                  <div class="list-group-item">Apr</div>
+                  <div class="list-group-item">May</div>
+                  <div class="list-group-item">Jun</div>
+                  <div class="list-group-item">Jul</div>
+                  <div class="list-group-item">Aug</div>
+                  <div class="list-group-item">Sep</div>
+                  <div class="list-group-item">Oct</div>
+                  <div class="list-group-item">Nov</div>
+                  <div class="list-group-item">Dec</div>
+                  <div class="list-group-item">Blank</div>
+                </div>
+              </div>
+            </div>
+            <div class="card p-3 mt-3">
+              <button type="button" class="btn btn-primary mb-2">PO Analysis</button>
+              <button type="button" class="btn btn-success">Generate Report</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bottom Tiles -->
+    <div class="row g-3 mt-1">
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Accounts Payable</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Accounts Receivable</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Payroll</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Financial Analyst</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Tax Accountant</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="category-chip">
+          <div class="fw-bold">Accounting</div>
+          <p class="mb-0">Lorem Ipsum is simply dummy text</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Employee Score (Bar)
+    const barCtx = document.getElementById('barEmployee');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['David Lee', 'Emma Johnson', 'John Smith', 'Michael Davis', 'Olivia Brown', 'Robert Wilson', 'Sophia Martinez'],
+        datasets: [{
+          label: 'Score',
+          data: [6.75, 6.75, 8.96, 6.75, 6.75, 6.75, 6.75],
+          borderRadius: 8,
+          backgroundColor: '#6b99ff'
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, max: 10, grid: { color: '#eef2ff' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Average Delay Days (Line)
+    const lineCtx = document.getElementById('lineDelay');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['<30', '30-45 Days', '45-60 Days', '60-90 Days', '90-120 Days', '120-150 Days'],
+        datasets: [{
+          label: 'Avg Delay (days)',
+          data: [0, 3.9, 2, 2.9, 3.6, 0],
+          fill: false,
+          tension: .4,
+          pointRadius: 4,
+          borderColor: '#2a5bd7'
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { min: 0, max: 4, grid: { color: '#eef2ff' } }, x: { grid: { display: false } } }
+      }
+    });
+
+    // Audit Status (Doughnut)
+    const donut = document.getElementById('donutStatus');
+    new Chart(donut, {
+      type: 'doughnut',
+      data: {
+        labels: ['EE1', 'EE2', 'EE3', 'EE4', 'EE5', 'EE6', 'EE7', 'Pending', 'Data Pending'],
+        datasets: [{
+          data: [18, 16, 14, 12, 10, 8, 6, 10, 6],
+          cutout: '60%',
+          backgroundColor: ['#6b99ff', '#8bb0ff', '#a5c2ff', '#bcd1ff', '#d3e1ff', '#e3ebff', '#f0f5ff', '#2a5bd7', '#13233f']
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+
+  <script>
+    const ctx = document.getElementById('workingCapitalChart').getContext('2d');
+
+    const workingCapitalChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [
+          {
+            label: 'Working Capital',
+            data: [0, 92011, 0, 0, 278798, 0],
+            backgroundColor: '#b5b5b5'
+          },
+          {
+            label: 'Current Asset',
+            data: [0, 0, -55419, -55089, 0, -145800],
+            backgroundColor: '#8da6d7'
+          },
+          {
+            label: 'Current Liability',
+            data: [0, 0, -25419, -35089, 0, -105800],
+            backgroundColor: '#3b6fc3'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return context.dataset.label + ': ' + context.raw.toLocaleString();
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value.toLocaleString();
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+  <script>
+    var data = [{
+      type: "sunburst",
+      labels: [
+        "Food Inventory", "Beverage Inventory", "Other Inventory",
+        "Meat & Lamb", "Seafood", "Produce", "Dairy", "Frozen Foods", "Pastry Department", "Dry Storage", "Condiment",
+        "Wine", "Liquor", "Beer", "Non-Alcoholic"
+      ],
+      parents: [
+        "", "", "",
+        "Food Inventory", "Food Inventory", "Food Inventory", "Food Inventory", "Food Inventory", "Food Inventory", "Food Inventory", "Food Inventory",
+        "Beverage Inventory", "Beverage Inventory", "Beverage Inventory", "Beverage Inventory"
+      ],
+      values: [
+        60, 30, 10,
+        10, 8, 8, 7, 6, 5, 8, 8,
+        12, 8, 6, 4
+      ],
+      branchvalues: "total",
+      textinfo: "label+percent entry",
+      insidetextorientation: "radial",
+      marker: { line: { width: 1 } }
+    }];
+
+    var layout = {
+      margin: { l: 0, r: 0, b: 0, t: 0 },
+      sunburstcolorway: ["#1f77b4"],
+      extendsunburstcolorway: true
+    };
+
+    Plotly.newPlot('sunburstChart', data, layout, { displayModeBar: false });
+  </script>
+
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+    body {
+      background: #eef3fb;
+      font-size: 14px;
+    }
+
+    .app-shell {
+      background: #cfe0ec;
+      border: 1px solid #d7e1ff
+    }
+
+    .brandbar {
+      background: #173563;
+      color: #fff
+    }
+
+    .brandbar h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      padding: .4rem 0;
+      letter-spacing: .3px
+    }
+
+    .card {
+      border: 0;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(31, 50, 85, .08)
+    }
+
+    .card-header {
+      background: transparent;
+      border-bottom: 0;
+      font-weight: 700;
+      color: #2a3b5d
+    }
+
+    .kpi {
+      font-size: 30px;
+      font-weight: 600;
+      color: #1f3255;
+    }
+
+    .muted {
+      color: #6b7a99
+    }
+
+    .sidebar {
+      min-width: 200px
+    }
+
+    .heatmap th,
+    .heatmap td {
+      vertical-align: middle;
+      text-align: center
+    }
+
+    .heatmap thead th {
+      position: sticky;
+      top: 0;
+      background: #f8faff;
+      z-index: 2
+    }
+
+    .heatmap tbody th {
+      background: #f8faff;
+      text-align: left
+    }
+
+    .cell {
+      color: #13233f;
+      font-weight: 600
+    }
+
+    .c-0 {
+      background: #e9efff
+    }
+
+    .c-1 {
+      background: #d3e1ff
+    }
+
+    .c-2 {
+      background: #bcd1ff
+    }
+
+    .c-3 {
+      background: #a5c2ff
+    }
+
+    .c-4 {
+      background: #8bb0ff
+    }
+
+    .c-5 {
+      background: #6b99ff;
+      color: #fff
+    }
+
+    .ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(#4f7bff 0 var(--val), #e7edff var(--val) 100%);
+      display: grid;
+      place-items: center;
+      margin: auto
+    }
+
+    .ring::after {
+      content: attr(data-label);
+      font-weight: 800;
+      color: #1f3255
+    }
+
+    .list-compact .list-group-item {
+      padding: .5rem .75rem;
+      border: 0;
+      border-bottom: 1px dashed #e3e9ff;
+      background: #fff
+    }
+
+    .category-chip {
+      background: #fff;
+      border: 1px solid #dbe4ff;
+      padding: .9rem 1.25rem;
+      color: #2d3f69;
+      text-align: center
+    }
+
+    .cta-tile {
+      background: #2a5bd7;
+      color: #fff;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%
+    }
+
+    .scroll-y {
+      max-height: 260px;
+      overflow: auto
+    }
+
+    .list-unstyled li {
+      display: inline-block;
+      font-size: 12px;
+      border: 1px #e5e5e5 solid;
+      padding: 5px;
+      margin-top: 5px;
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      background-color: #2d5f91;
+      border-color: #2d5f91;
+    }
+
+    .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+      color: #ffffff;
+      background-color: #2d5f91;
+    }
+    .nav-tabs .nav-link {
+      border-radius: 5px;
+    }
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        order: -1
+      }
+    }
