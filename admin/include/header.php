@@ -461,7 +461,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item mt-0" href="pages-account-settings-account.html">
+                      <a class="dropdown-item mt-0" href="#">
                         <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 me-2">
                             <div class="avatar avatar-online">
@@ -478,19 +478,19 @@
                       <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-profile-user.html">
+                      <a class="dropdown-item" href="#">
                         <i class="icon-base ti tabler-user me-3 icon-md"></i
                         ><span class="align-middle">My Profile</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
+                      <a class="dropdown-item" href="#">
                         <i class="icon-base ti tabler-settings me-3 icon-md"></i
                         ><span class="align-middle">Settings</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-billing.html">
+                      <a class="dropdown-item" href="#">
                         <span class="d-flex align-items-center align-middle">
                           <i class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i
                           ><span class="flex-grow-1 align-middle">Billing</span>
@@ -504,13 +504,13 @@
                       <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-pricing.html">
+                      <a class="dropdown-item" href="#">
                         <i class="icon-base ti tabler-currency-dollar me-3 icon-md"></i
                         ><span class="align-middle">Pricing</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-faq.html">
+                      <a class="dropdown-item" href="#">
                         <i class="icon-base ti tabler-question-mark me-3 icon-md"></i
                         ><span class="align-middle">FAQ</span>
                       </a>
