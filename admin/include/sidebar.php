@@ -43,10 +43,17 @@
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
              
-            <li class="menu-item active">
+            <li class="menu-item <?= (basename($_SERVER['REQUEST_URI']) == 'dashboard.php') ? 'active' : '' ?>">
               <a href="dashboard.php" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
+              </a>
+            </li>
+             
+            <li class="menu-item <?= (basename($_SERVER['REQUEST_URI']) == 'import_data.php') ? 'active' : '' ?>">
+              <a href="import_data.php" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-smart-home"></i>
+                <div data-i18n="Import Data">Import Data</div>
               </a>
             </li>
 

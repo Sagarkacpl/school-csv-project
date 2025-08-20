@@ -120,19 +120,60 @@
                 <span class="text-muted"><i class="bi bi-funnel"></i></span>
               </div>
               <div class="card-body p-0">
-                <div class="list-group list-compact scroll-y">
-                  <div class="list-group-item">Accounting</div>
-                  <div class="list-group-item">Accounts Payable</div>
-                  <div class="list-group-item">Accounts Receivable</div>
-                  <div class="list-group-item">Credit &amp; Collections</div>
-                  <div class="list-group-item">Payroll</div>
-                  <div class="list-group-item">Audit</div>
-                  <div class="list-group-item">Finance</div>
-                  <div class="list-group-item">Risk &amp; Compliance</div>
+                <div class="list-group list-compact scroll-y department-group">
+
+                  <!-- Departments as radio -->
+                  <label class="list-group-item active">
+                    <input type="radio" name="department" value="Accounting" hidden checked> Accounting
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Accounts Payable" hidden> Accounts Payable
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Accounts Receivable" hidden> Accounts Receivable
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Credit & Collections" hidden> Credit & Collections
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Payroll" hidden> Payroll
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Audit" hidden> Audit
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Finance" hidden> Finance
+                  </label>
+                  <label class="list-group-item">
+                    <input type="radio" name="department" value="Risk & Compliance" hidden> Risk & Compliance
+                  </label>
+
                 </div>
               </div>
             </div>
           </div>
+
+          <style>
+            /* Hide default radio dots */
+            input[type="radio"] {
+              display: none;
+            }
+
+            /* Label as selectable item */
+            .list-group-item {
+              cursor: pointer;
+              transition: background 0.2s, color 0.2s;
+            }
+
+            /* Active (selected) state */
+            .list-group-item.active {
+              background-color: #0d6efd !important;
+              color: #fff !important;
+              font-weight: bold;
+            }
+          </style>
+
+
 
           <!-- Assistant / Notes + Efficiency -->
           <div class="col-xl-3 col-lg-5">
@@ -266,40 +307,108 @@
       </div>
 
       <!-- SIDEBAR -->
-      <aside class="col-lg-2 col-12 sidebar">
-        <div class="row g-3">
-          <!-- Departments -->
-          <div class="col-12">
-            <div class="card h-100">
-              <div class="card-header d-flex align-items-center justify-content-between">
-                <span>Month</span>
-                <span class="text-muted"><i class="bi bi-funnel"></i></span>
-              </div>
-              <div class="card-body p-0">
-                <div class="list-group list-compact">
-                  <div class="list-group-item">Jan</div>
-                  <div class="list-group-item">Feb</div>
-                  <div class="list-group-item">Mar</div>
-                  <div class="list-group-item">Apr</div>
-                  <div class="list-group-item">May</div>
-                  <div class="list-group-item">Jun</div>
-                  <div class="list-group-item">Jul</div>
-                  <div class="list-group-item">Aug</div>
-                  <div class="list-group-item">Sep</div>
-                  <div class="list-group-item">Oct</div>
-                  <div class="list-group-item">Nov</div>
-                  <div class="list-group-item">Dec</div>
-                  <div class="list-group-item">Blank</div>
+      <!DOCTYPE html>
+      <html lang="en">
+
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Original Design Fixed</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+      </head>
+
+      <body>
+
+        <aside class="col-lg-2 col-12 sidebar">
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <span>Month</span>
+                  <span class="text-muted"><i class="bi bi-funnel"></i></span>
+                </div>
+                <div class="card-body p-0">
+                  <div class="list-group list-compact month-group">
+                    <!-- Months as radio -->
+                    <label class="list-group-item active">
+                      <input type="radio" name="month" value="Jan" checked> Jan
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Feb"> Feb
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Mar"> Mar
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Apr"> Apr
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="May"> May
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Jun"> Jun
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Jul"> Jul
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Aug"> Aug
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Sep"> Sep
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Oct"> Oct
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Nov"> Nov
+                    </label>
+                    <label class="list-group-item">
+                      <input type="radio" name="month" value="Dec"> Dec
+                    </label>
+
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card p-3 mt-3">
-              <button type="button" class="btn btn-primary mb-2">PO Analysis</button>
-              <button type="button" class="btn btn-success">Generate Report</button>
+
+              <!-- Action Buttons -->
+              <div class="card p-3 mt-3">
+                <button type="button" class="btn btn-primary mb-2 w-100" onclick="checkCurrentSelection()">PO
+                  Analysis</button>
+                <button type="button" class="btn btn-success w-100">Generate Report</button>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>
+
+
+        <style>
+          /* Hide default radio dots */
+          input[type="radio"] {
+            display: none;
+          }
+
+          /* Label as selectable item */
+          .list-group-item {
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+          }
+
+          /* Active (selected) state */
+          .list-group-item.active {
+            background-color: #0d6efd !important;
+            color: #fff !important;
+            font-weight: bold;
+          }
+        </style>
+
+
+
+
     </div>
 
     <!-- Bottom Tiles -->
@@ -494,6 +603,150 @@
   </script>
 
   <script src="./assets/js/bootstrap.bundle.min.js"></script>
-</body>
+  <!DOCTYPE html>
+  <html lang="en">
 
-</html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Original Design Fixed</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+      rel="stylesheet">
+  </head>
+
+  <body>
+
+    <aside class="col-lg-2 col-12 sidebar">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <span>Month</span>
+              <span class="text-muted"><i class="bi bi-funnel"></i></span>
+            </div>
+            <div class="card-body p-0">
+              <div class="list-group list-compact">
+
+                <!-- Months as radio -->
+                <label class="list-group-item active">
+                  <input type="radio" name="month" value="Jan" checked> Jan
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Feb"> Feb
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Mar"> Mar
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Apr"> Apr
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="May"> May
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Jun"> Jun
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Jul"> Jul
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Aug"> Aug
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Sep"> Sep
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Oct"> Oct
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Nov"> Nov
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Dec"> Dec
+                </label>
+                <label class="list-group-item">
+                  <input type="radio" name="month" value="Blank"> Blank
+                </label>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="card p-3 mt-3">
+            <button type="button" class="btn btn-primary mb-2 w-100">PO Analysis</button>
+            <button type="button" class="btn btn-success w-100">Generate Report</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <style>
+      /* Hide default radio dots */
+      input[type="radio"] {
+        display: none;
+      }
+
+      /* Label as selectable item */
+      .list-group-item {
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      /* Active (selected) state */
+      .list-group-item.active {
+        background-color: #0d6efd !important;
+        color: #fff !important;
+        font-weight: bold;
+      }
+    </style>
+
+    <script>
+      // Reusable function for each group
+      function setupRadioGroup(containerSelector) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        container.querySelectorAll("label.list-group-item").forEach(label => {
+          label.addEventListener("click", function () {
+            // remove active + checked from only this container
+            container.querySelectorAll("label.list-group-item").forEach(l => {
+              l.classList.remove("active");
+              const radio = l.querySelector("input[type='radio']");
+              if (radio) {
+                radio.checked = false;
+                radio.removeAttribute("checked");  // attribute bhi remove
+              }
+            });
+
+            // set active + checked for clicked one
+            this.classList.add("active");
+            const radio = this.querySelector("input[type='radio']");
+            if (radio) {
+              radio.checked = true;
+              radio.setAttribute("checked", "checked"); // attribute bhi add
+            }
+          });
+        });
+      }
+
+      // Init for both groups
+      setupRadioGroup(".department-group");
+      setupRadioGroup(".month-group");
+
+      // Function to get current selection
+      function checkCurrentSelection() {
+        const dept = document.querySelector("input[name='department']:checked")?.value || "None";
+        const month = document.querySelector("input[name='month']:checked")?.value || "None";
+        alert("Selected Department: " + dept + "\nSelected Month: " + month);
+      }
+    </script>
+
+
+
+  </body>
+
+  </html>

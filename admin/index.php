@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'include/dbconn.php';
+if(!empty($_SESSION['user_email']) && !empty($_SESSION['name']) && !empty($_SESSION['user_id'])) {
+    header('Location: dashboard.php');
+    exit();
+}
 if(isset($_POST['email-username']) && isset($_POST['password']) && !empty($_POST['email-username']) && !empty($_POST['password'])) {
     $email = $_POST['email-username'];
     $password = md5($_POST['password']);

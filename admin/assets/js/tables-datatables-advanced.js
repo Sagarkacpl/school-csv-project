@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
   // Responsive Table
   // --------------------------------------------------------------------
 
-  const dt_responsive_table = document.querySelector('.dt-responsive');
+  const dt_responsive_table = document.querySelector('.dt-responsivse');
   if (dt_responsive_table) {
     let dt_responsive = new DataTable(dt_responsive_table, {
       ajax: assetsPath + 'json/table-datatable.json',
