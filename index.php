@@ -12,10 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Chart.js -->
   <script src="./assets/js/chart.umd.min.js"></script>
-
   <script src="./assets/js/plotly-latest.min.js"></script>
-
-
 </head>
 
 <body>
@@ -28,7 +25,6 @@
         <button class="btn btn-sm btn-outline-light"><i class="bi bi-download"></i> Export</button>
       </div> -->
     </div>
-
     <div class="row g-3">
       <!-- MAIN BODY -->
       <div class="col-lg-10 col-12">
@@ -101,7 +97,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-2">
             <div class="card h-100">
               <div class="card-body d-flex align-items-center justify-content-center flex-column">
@@ -112,7 +107,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-3">
             <div class="card h-100">
               <div class="card-header d-flex align-items-center justify-content-between">
@@ -121,7 +115,6 @@
               </div>
               <div class="card-body p-0">
                 <div class="list-group list-compact scroll-y department-group">
-
                   <!-- Departments as radio -->
                   <label class="list-group-item active">
                     <input type="radio" name="department" value="Accounting" hidden checked> Accounting
@@ -147,12 +140,10 @@
                   <label class="list-group-item">
                     <input type="radio" name="department" value="Risk & Compliance" hidden> Risk & Compliance
                   </label>
-
                 </div>
               </div>
             </div>
           </div>
-
           <style>
             /* Hide default radio dots */
             input[type="radio"] {
@@ -172,9 +163,6 @@
               font-weight: bold;
             }
           </style>
-
-
-
           <!-- Assistant / Notes + Efficiency -->
           <div class="col-xl-3 col-lg-5">
             <div class="card h-100">
@@ -194,7 +182,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-xl-6 col-lg-5">
             <div class="card">
               <div class="card-header">Change in working capital</div>
@@ -241,19 +228,12 @@
                   </nav>
                 </div>
               </div>
-
-
-
             </div>
           </div>
-
-
-
           <div class="col-xl-3 col-lg-3">
             <div class="card">
               <div class="card-header">Inventory</div>
               <div class="card-body text-center">
-
                 <nav>
                   <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
@@ -262,7 +242,6 @@
                       type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ageing</button>
                   </div>
                 </nav>
-
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row">
@@ -298,14 +277,11 @@
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <!-- SIDEBAR -->
       <!DOCTYPE html>
       <html lang="en">
@@ -322,7 +298,6 @@
       </head>
 
       <body>
-
         <aside class="col-lg-2 col-12 sidebar">
           <div class="row g-3">
             <div class="col-12">
@@ -370,11 +345,9 @@
                     <label class="list-group-item">
                       <input type="radio" name="month" value="Dec"> Dec
                     </label>
-
                   </div>
                 </div>
               </div>
-
               <!-- Action Buttons -->
               <div class="card p-3 mt-3">
                 <button type="button" class="btn btn-primary mb-2 w-100" onclick="checkCurrentSelection()">PO
@@ -384,8 +357,6 @@
             </div>
           </div>
         </aside>
-
-
         <style>
           /* Hide default radio dots */
           input[type="radio"] {
@@ -405,12 +376,7 @@
             font-weight: bold;
           }
         </style>
-
-
-
-
     </div>
-
     <!-- Bottom Tiles -->
     <div class="row g-3 mt-1">
       <div class="col-6 col-md-4 col-lg-2">
@@ -418,7 +384,6 @@
           <div class="fw-bold">Accounts Payable</div>
           <p class="mb-0">Lorem Ipsum is simply dummy text</p>
         </div>
-
       </div>
       <div class="col-6 col-md-4 col-lg-2">
         <div class="category-chip">
@@ -451,9 +416,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <script>
     // Employee Score (Bar)
     const barCtx = document.getElementById('barEmployee');
@@ -476,7 +439,6 @@
         }
       }
     });
-
     // Average Delay Days (Line)
     const lineCtx = document.getElementById('lineDelay');
     new Chart(lineCtx, {
@@ -497,7 +459,6 @@
         scales: { y: { min: 0, max: 4, grid: { color: '#eef2ff' } }, x: { grid: { display: false } } }
       }
     });
-
     // Audit Status (Doughnut)
     const donut = document.getElementById('donutStatus');
     new Chart(donut, {
@@ -515,10 +476,8 @@
       }
     });
   </script>
-
   <script>
     const ctx = document.getElementById('workingCapitalChart').getContext('2d');
-
     const workingCapitalChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -568,7 +527,6 @@
       }
     });
   </script>
-
   <script>
     var data = [{
       type: "sunburst",
@@ -592,16 +550,13 @@
       insidetextorientation: "radial",
       marker: { line: { width: 1 } }
     }];
-
     var layout = {
       margin: { l: 0, r: 0, b: 0, t: 0 },
       sunburstcolorway: ["#1f77b4"],
       extendsunburstcolorway: true
     };
-
     Plotly.newPlot('sunburstChart', data, layout, { displayModeBar: false });
   </script>
-
   <script src="./assets/js/bootstrap.bundle.min.js"></script>
   <!DOCTYPE html>
   <html lang="en">
@@ -618,7 +573,6 @@
   </head>
 
   <body>
-
     <aside class="col-lg-2 col-12 sidebar">
       <div class="row g-3">
         <div class="col-12">
@@ -629,7 +583,6 @@
             </div>
             <div class="card-body p-0">
               <div class="list-group list-compact">
-
                 <!-- Months as radio -->
                 <label class="list-group-item active">
                   <input type="radio" name="month" value="Jan" checked> Jan
@@ -670,11 +623,9 @@
                 <label class="list-group-item">
                   <input type="radio" name="month" value="Blank"> Blank
                 </label>
-
               </div>
             </div>
           </div>
-
           <!-- Action Buttons -->
           <div class="card p-3 mt-3">
             <button type="button" class="btn btn-primary mb-2 w-100">PO Analysis</button>
@@ -683,7 +634,6 @@
         </div>
       </div>
     </aside>
-
     <style>
       /* Hide default radio dots */
       input[type="radio"] {
@@ -703,13 +653,11 @@
         font-weight: bold;
       }
     </style>
-
     <script>
       // Reusable function for each group
       function setupRadioGroup(containerSelector) {
         const container = document.querySelector(containerSelector);
         if (!container) return;
-
         container.querySelectorAll("label.list-group-item").forEach(label => {
           label.addEventListener("click", function () {
             // remove active + checked from only this container
@@ -721,7 +669,6 @@
                 radio.removeAttribute("checked");  // attribute bhi remove
               }
             });
-
             // set active + checked for clicked one
             this.classList.add("active");
             const radio = this.querySelector("input[type='radio']");
@@ -732,11 +679,9 @@
           });
         });
       }
-
       // Init for both groups
       setupRadioGroup(".department-group");
       setupRadioGroup(".month-group");
-
       // Function to get current selection
       function checkCurrentSelection() {
         const dept = document.querySelector("input[name='department']:checked")?.value || "None";
@@ -744,9 +689,6 @@
         alert("Selected Department: " + dept + "\nSelected Month: " + month);
       }
     </script>
-
-
-
   </body>
 
   </html>
