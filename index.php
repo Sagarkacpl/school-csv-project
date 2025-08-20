@@ -13,6 +13,8 @@
   <!-- Chart.js -->
   <script src="./assets/js/chart.umd.min.js"></script>
   <script src="./assets/js/plotly-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -209,7 +211,7 @@
                       </div>
                     </div>
                     <div class="tab-pane fade" id="bar-chart-2" role="tabpanel" aria-labelledby="bar-chart-2">
-                      2222222
+                      <canvas id="arlineDelay" height="110"></canvas>
                     </div>
                   </div>
                 </div>
@@ -283,21 +285,7 @@
         </div>
       </div>
       <!-- SIDEBAR -->
-      <!DOCTYPE html>
-      <html lang="en">
-
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Original Design Fixed</title>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Bootstrap Icons -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
-          rel="stylesheet">
-      </head>
-
-      <body>
+      
         <aside class="col-lg-2 col-12 sidebar">
           <div class="row g-3">
             <div class="col-12">
@@ -310,40 +298,40 @@
                   <div class="list-group list-compact month-group">
                     <!-- Months as radio -->
                     <label class="list-group-item active">
-                      <input type="radio" name="month" value="Jan" checked> Jan
+                      <input type="radio" name="month" value="01" checked> Jan
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Feb"> Feb
+                      <input type="radio" name="month" value="02"> Feb
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Mar"> Mar
+                      <input type="radio" name="month" value="03"> Mar
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Apr"> Apr
+                      <input type="radio" name="month" value="04"> Apr
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="May"> May
+                      <input type="radio" name="month" value="05"> May
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Jun"> Jun
+                      <input type="radio" name="month" value="06"> Jun
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Jul"> Jul
+                      <input type="radio" name="month" value="07"> Jul
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Aug"> Aug
+                      <input type="radio" name="month" value="08"> Aug
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Sep"> Sep
+                      <input type="radio" name="month" value="09"> Sep
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Oct"> Oct
+                      <input type="radio" name="month" value="10"> Oct
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Nov"> Nov
+                      <input type="radio" name="month" value="11"> Nov
                     </label>
                     <label class="list-group-item">
-                      <input type="radio" name="month" value="Dec"> Dec
+                      <input type="radio" name="month" value="12"> Dec
                     </label>
                   </div>
                 </div>
@@ -440,25 +428,126 @@
       }
     });
     // Average Delay Days (Line)
-    const lineCtx = document.getElementById('lineDelay');
-    new Chart(lineCtx, {
-      type: 'line',
-      data: {
-        labels: ['<30', '30-45 Days', '45-60 Days', '60-90 Days', '90-120 Days', '120-150 Days'],
-        datasets: [{
-          label: 'Avg Delay (days)',
-          data: [0, 3.9, 2, 2.9, 3.6, 0],
-          fill: false,
-          tension: .4,
-          pointRadius: 4,
-          borderColor: '#2a5bd7'
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: { y: { min: 0, max: 4, grid: { color: '#eef2ff' } }, x: { grid: { display: false } } }
-      }
+    let lineChart;
+
+    function loadChartData(month) {
+      $.ajax({
+        url: "ap_fetch_data.php",   // backend PHP file
+        type: "POST",
+        data: { month: month },
+        dataType: "json",
+        success: function(response) {
+          if (lineChart) {
+            lineChart.destroy(); // destroy old chart
+          }
+
+          const ctx = document.getElementById('lineDelay');
+          lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['<30', '30-45 Days', '45-60 Days', '60-90 Days', '90-120 Days', '120-150 Days'],
+              datasets: [{
+                label: 'Avg Delay (days)',
+                data: response,
+                fill: false,
+                tension: .4,
+                pointRadius: 4,
+                borderColor: '#2a5bd7'
+              }]
+            },
+            options: {
+              plugins: { legend: { display: false } },
+              scales: { 
+                y: { beginAtZero: true, grid: { color: '#eef2ff' } }, 
+                x: { grid: { display: false } } 
+              }
+            }
+          });
+        }
+      });
+    }
+
+    // 🔹 On load (default checked month)
+    window.onload = function() {
+      const defaultMonth = document.querySelector("input[name='month']:checked").value;
+      loadChartData(defaultMonth);
+    };
+
+    // 🔹 On change & On click for radio buttons
+    document.querySelectorAll(".month-group label").forEach(label => {
+      label.addEventListener("click", function() {
+        const radio = this.querySelector("input[name='month']");
+        radio.checked = true;
+
+        // active class toggle
+        document.querySelectorAll(".month-group label").forEach(l => l.classList.remove("active"));
+        this.classList.add("active");
+
+        loadChartData(radio.value);
+      });
     });
+
+    let arlineChart;
+
+function loadARChartData(month) {
+  $.ajax({
+    url: "ar_fetch_data.php",   // backend PHP file
+    type: "POST",
+    data: { month: month },
+    dataType: "json",
+    success: function(response) {
+      if (arlineChart) {
+        arlineChart.destroy(); // destroy old chart
+      }
+
+      const ctx = document.getElementById('arlineDelay');
+      arlineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['<30', '30-45 Days', '45-60 Days', '60-90 Days', '90-120 Days', '120-150 Days'],
+          datasets: [{
+            label: 'Avg Delay (days)',
+            data: response,
+            fill: false,
+            tension: .4,
+            pointRadius: 4,
+            borderColor: '#2a5bd7'
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { 
+            y: { beginAtZero: true, grid: { color: '#eef2ff' } }, 
+            x: { grid: { display: false } } 
+          }
+        }
+      });
+    }
+  });
+}
+
+// 🔹 On load (default checked month) for AR chart
+window.addEventListener('load', function() {
+  const defaultMonth = document.querySelector("input[name='month']:checked").value;
+  loadARChartData(defaultMonth);
+});
+
+// 🔹 On change & On click for radio buttons for AR chart
+document.querySelectorAll(".month-group label").forEach(label => {
+  label.addEventListener("click", function() {
+    const radio = this.querySelector("input[name='month']");
+    radio.checked = true;
+
+    // active class toggle
+    document.querySelectorAll(".month-group label").forEach(l => l.classList.remove("active"));
+    this.classList.add("active");
+
+    loadARChartData(radio.value);
+  });
+});
+
+    
+
     // Audit Status (Doughnut)
     const donut = document.getElementById('donutStatus');
     new Chart(donut, {
@@ -558,101 +647,7 @@
     Plotly.newPlot('sunburstChart', data, layout, { displayModeBar: false });
   </script>
   <script src="./assets/js/bootstrap.bundle.min.js"></script>
-  <!DOCTYPE html>
-  <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Original Design Fixed</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
-      rel="stylesheet">
-  </head>
-
-  <body>
-    <aside class="col-lg-2 col-12 sidebar">
-      <div class="row g-3">
-        <div class="col-12">
-          <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between">
-              <span>Month</span>
-              <span class="text-muted"><i class="bi bi-funnel"></i></span>
-            </div>
-            <div class="card-body p-0">
-              <div class="list-group list-compact">
-                <!-- Months as radio -->
-                <label class="list-group-item active">
-                  <input type="radio" name="month" value="Jan" checked> Jan
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Feb"> Feb
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Mar"> Mar
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Apr"> Apr
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="May"> May
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Jun"> Jun
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Jul"> Jul
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Aug"> Aug
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Sep"> Sep
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Oct"> Oct
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Nov"> Nov
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Dec"> Dec
-                </label>
-                <label class="list-group-item">
-                  <input type="radio" name="month" value="Blank"> Blank
-                </label>
-              </div>
-            </div>
-          </div>
-          <!-- Action Buttons -->
-          <div class="card p-3 mt-3">
-            <button type="button" class="btn btn-primary mb-2 w-100">PO Analysis</button>
-            <button type="button" class="btn btn-success w-100">Generate Report</button>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <style>
-      /* Hide default radio dots */
-      input[type="radio"] {
-        display: none;
-      }
-
-      /* Label as selectable item */
-      .list-group-item {
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s;
-      }
-
-      /* Active (selected) state */
-      .list-group-item.active {
-        background-color: #0d6efd !important;
-        color: #fff !important;
-        font-weight: bold;
-      }
-    </style>
+  
     <script>
       // Reusable function for each group
       function setupRadioGroup(containerSelector) {
