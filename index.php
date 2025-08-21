@@ -139,7 +139,7 @@
           </div>
 
           <!-- Assistant / Notes + Efficiency -->
-          <div class="col-xl-3 col-lg-5">
+          <div class="col-xl-2 col-lg-5">
             <div class="card h-100">
               <div class="card-header">Feel Free to Ask Any Finance Questions</div>
               <div class="card-body">
@@ -214,20 +214,30 @@
 
 
 
-          <div class="col-xl-6 col-lg-5">
+          <div class="col-xl-7 col-lg-5">
             <div class="card">
-              <div class="card-header">Change in working capitals</div>
+              <div class="card-header">Change in working capital</div>
               <div class="card-body">
-                <canvas id="workingCapitalChart"></canvas>
-                <ul class="list-unstyled text-center">
-                  <li class="mb-2"><span class="badge bg-secondary">&nbsp;</span> Working Capital:
-                    <strong>22,868K</strong>
-                  </li>
-                  <li class="mb-2"><span class="badge bg-primary">&nbsp;</span> Current Asset:
-                    <strong>25,139K</strong>
-                  </li>
-                  <li><span class="badge bg-info">&nbsp;</span> Current Liability: <strong>(2,271K)</strong></li>
-                </ul>
+                <div class="row">
+                  <!-- Left Side Static Chart -->
+                  <div class="col-md-8">
+                    <canvas id="workingCapitalChart"></canvas>
+                  </div>
+
+                  <!-- Right Side Dynamic Values -->
+                  <div class="col-md-4 d-flex align-items-center justify-content-center flex-column">
+                    <div>
+                      <ul class="list-unstyled text-center">
+                        <li><span class="badge bg-secondary">&nbsp;</span> Working Capital:</li>
+                        <li class="value-box working-capital"><strong>0</strong></li>
+                        <li><span class="badge bg-primary">&nbsp;</span> Current Asset:</li>
+                        <li class="value-box current-asset"><strong>0</strong></li>
+                        <li><span class="badge bg-info">&nbsp;</span> Current Liability:</li>
+                        <li class="value-box current-liability"><strong>0</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card mt-3 pt-2 pb-2">
@@ -494,53 +504,53 @@
 
   <!-- Working Capital Chart -->
   <script>
-    const ctx = document.getElementById('workingCapitalChart').getContext('2d');
-    const workingCapitalChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [
-          {
-            label: 'Working Capital',
-            data: [0, 92011, 0, 0, 278798, 0],
-            backgroundColor: '#b5b5b5'
-          },
-          {
-            label: 'Current Asset',
-            data: [0, 0, -55419, -55089, 0, -145800],
-            backgroundColor: '#8da6d7'
-          },
-          {
-            label: 'Current Liability',
-            data: [0, 0, -25419, -35089, 0, -105800],
-            backgroundColor: '#3b6fc3'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'top' },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return context.dataset.label + ': ' + context.raw.toLocaleString();
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function (value) {
-                return value.toLocaleString();
-              }
-            }
-          }
-        }
-      }
-    });
+    // const ctx = document.getElementById('workingCapitalChart').getContext('2d');
+    // const workingCapitalChart = new Chart(ctx, {
+    //   type: 'bar',
+    //   data: {
+    //     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    //     datasets: [
+    //       {
+    //         label: 'Working Capital',
+    //         data: [0, 92011, 0, 0, 278798, 0],
+    //         backgroundColor: '#b5b5b5'
+    //       },
+    //       {
+    //         label: 'Current Asset',
+    //         data: [0, 0, -55419, -55089, 0, -145800],
+    //         backgroundColor: '#8da6d7'
+    //       },
+    //       {
+    //         label: 'Current Liability',
+    //         data: [0, 0, -25419, -35089, 0, -105800],
+    //         backgroundColor: '#3b6fc3'
+    //       }
+    //     ]
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     plugins: {
+    //       legend: { position: 'top' },
+    //       tooltip: {
+    //         callbacks: {
+    //           label: function (context) {
+    //             return context.dataset.label + ': ' + context.raw.toLocaleString();
+    //           }
+    //         }
+    //       }
+    //     },
+    //     scales: {
+    //       y: {
+    //         beginAtZero: true,
+    //         ticks: {
+    //           callback: function (value) {
+    //             return value.toLocaleString();
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // });
   </script>
   <!-- Radio Group Setup -->
   <script>
@@ -985,6 +995,110 @@
   </script>
 
 <script>
+/* ---------- Chart Initialization (empty) ---------- */
+const ctx = document.getElementById("workingCapitalChart").getContext("2d");
+
+let wcChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: [], // will come from AJAX
+        datasets: [
+            {
+                label: "Working Capital",
+                data: [],
+                backgroundColor: "#9e9e9e"
+            },
+            {
+                label: "Current Asset",
+                data: [],
+                backgroundColor: "#5a8fdc"
+            },
+            {
+                label: "Current Liability",
+                data: [],
+                backgroundColor: "#2e62b5"
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: "top" },
+            tooltip: {
+                callbacks: {
+                    label: ctx => `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}`
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: v => v.toLocaleString()
+                }
+            }
+        }
+    }
+});
+
+/* ---------- Load Last 6 Months Chart Data ---------- */
+function loadWorkingCapitalChart(currentMonth) {
+    $.ajax({
+        url: "get_working_capital_6months.php",
+        type: "POST",
+        data: { month: currentMonth },
+        dataType: "json",
+        success: function(res) {
+            if (res.status === "success") {
+                wcChart.data.labels = res.labels;
+                wcChart.data.datasets[0].data = res.datasets.working_capital;
+                wcChart.data.datasets[1].data = res.datasets.assets;
+                wcChart.data.datasets[2].data = res.datasets.liabilities;
+                wcChart.update();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", error);
+        }
+    });
+}
+
+/* ---------- Right Side Dynamic Data ---------- */
+function loadWorkingCapitalData(month) {
+    $.ajax({
+        url: "fetch_working_capital.php",
+        type: "POST",
+        data: { month: month },
+        dataType: "json",
+        success: function(res) {
+            if (res.status === "success") {
+                document.querySelector(".working-capital strong").innerText = res.working_capital.toLocaleString();
+                document.querySelector(".current-asset strong").innerText = res.assets.toLocaleString();
+                document.querySelector(".current-liability strong").innerText = res.liabilities.toLocaleString();
+            }
+        }
+    });
+}
+
+/* ---------- Init ---------- */
+$(document).ready(function() {
+    const currentMonth = new Date().getMonth() + 1; // current month number (1-12)
+
+    // --- ONLOAD: default load (current month)
+    loadWorkingCapitalChart(currentMonth);
+    loadWorkingCapitalData(currentMonth);
+
+    // --- ONCLICK / onchange: user selects month
+    document.querySelectorAll("input[name='month']").forEach(radio => {
+        radio.addEventListener("click", function() {  // 👈 onclick
+            loadWorkingCapitalData(this.value);
+            loadWorkingCapitalChart(this.value);
+        });
+    });
+});
+
+
+
 function loadInventoryAllocationData(month) {
     $.ajax({
         url: "pie_chart_fetch_data.php",
@@ -1169,7 +1283,15 @@ $(document).ready(function() {
     updateDashboardDataEnhanced(defaultMonth);
 });
 
-
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".value-box").forEach(function (box) {
+      let num = parseInt(box.innerText.replace(/\D/g, "")) || 0; // get numeric part
+      let height = Math.max(30, num / 500); // scale factor (adjust divisor)
+      box.style.height = height + "px";
+    });
+  });
 </script>
 </body>
 </html>
