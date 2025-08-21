@@ -164,59 +164,59 @@
           </div>
 
           <script>
-function startChat() {
-  document.getElementById("startChat").classList.add("d-none");   // Button hide
-  document.getElementById("chatInputBox").classList.remove("d-none"); // Input+send show
-}
+            function startChat() {
+              document.getElementById("startChat").classList.add("d-none");   // Button hide
+              document.getElementById("chatInputBox").classList.remove("d-none"); // Input+send show
+            }
 
-function getCurrentIST() {
-  let now = new Date();
-  let options = { 
-    timeZone: "Asia/Kolkata", 
-    hour: "2-digit", 
-    minute: "2-digit", 
-    second: "2-digit", 
-    year: "numeric", 
-    month: "short", 
-    day: "numeric" 
-  };
-  return new Intl.DateTimeFormat("en-IN", options).format(now);
-}
+            function getCurrentIST() {
+              let now = new Date();
+              let options = { 
+                timeZone: "Asia/Kolkata", 
+                hour: "2-digit", 
+                minute: "2-digit", 
+                second: "2-digit", 
+                year: "numeric", 
+                month: "short", 
+                day: "numeric" 
+              };
+              return new Intl.DateTimeFormat("en-IN", options).format(now);
+            }
 
-function sendMessage() {
-  let message = document.getElementById("userMessage").value.trim();
-  if (message === "") return;
+            function sendMessage() {
+              let message = document.getElementById("userMessage").value.trim();
+              if (message === "") return;
 
-  let chatBox = document.getElementById("chatBox");
+              let chatBox = document.getElementById("chatBox");
 
-  // Append user msg with IST
-  chatBox.innerHTML += `<p><b>User</b> (${getCurrentIST()}): ${message}</p>`;
-  document.getElementById("userMessage").value = "";
+              // Append user msg with IST
+              chatBox.innerHTML += `<p><b>User</b> (${getCurrentIST()}): ${message}</p>`;
+              document.getElementById("userMessage").value = "";
 
-  chatBox.scrollTop = chatBox.scrollHeight;
+              chatBox.scrollTop = chatBox.scrollHeight;
 
-  // Call PHP API
-  fetch("chat_api.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: "message=" + encodeURIComponent(message)
-  })
-  .then(res => res.json())
-  .then(data => {
-    chatBox.innerHTML += `<p><b>Fincha Bot</b>: ${data.reply}</p>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
-  })
-  .catch(err => {
-    chatBox.innerHTML += `<p style="color:red;"><b>Error:</b> ${err}</p>`;
-  });
-}
-</script>
+              // Call PHP API
+              fetch("chat_api.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "message=" + encodeURIComponent(message)
+              })
+              .then(res => res.json())
+              .then(data => {
+                chatBox.innerHTML += `<p><b>Fincha Bot</b>: ${data.reply}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+              })
+              .catch(err => {
+                chatBox.innerHTML += `<p style="color:red;"><b>Error:</b> ${err}</p>`;
+              });
+            }
+            </script>
 
 
 
           <div class="col-xl-6 col-lg-5">
             <div class="card">
-              <div class="card-header">Change in working capital</div>
+              <div class="card-header">Change in working capitals</div>
               <div class="card-body">
                 <canvas id="workingCapitalChart"></canvas>
                 <ul class="list-unstyled text-center">
