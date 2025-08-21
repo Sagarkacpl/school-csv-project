@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userMessage = $_POST['message'] ?? '';
 
     // Example: Call OpenAI / Any API
+    $apiKey = "TESTWORD"; // <-- replace with your API key
     $apiKey = getenv("OPENAI_API_KEY");
 
     $ch = curl_init("https://api.openai.com/v1/chat/completions");
