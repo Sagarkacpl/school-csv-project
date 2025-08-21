@@ -318,15 +318,15 @@
                     <div class="row">
                       <div class="col-md-4">
                         <p class="mb-0">Food</p>
-                        <p class="fw-bold">193.96K</p>
+                        <p class="fw-bold">Loading....</p>
                       </div>
                       <div class="col-md-4">
                         <p class="mb-0">Beverage</p>
-                        <p class="fw-bold">274.74K</p>
+                        <p class="fw-bold">Loading....</p>
                       </div>
                       <div class="col-md-4">
                         <p class="mb-0">Other</p>
-                        <p class="fw-bold">52.95K</p>
+                        <p class="fw-bold">Loading....</p>
                       </div>
                     </div>
                     <div id="sunburstChart" style="height:250px;"></div>
