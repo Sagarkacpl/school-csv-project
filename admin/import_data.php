@@ -4,6 +4,9 @@ if(empty($_SESSION['user_email']) && empty($_SESSION['name']) && empty($_SESSION
     header('Location: index.php');
     exit();
 }
+include 'include/dbconn.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 
 <!doctype html>
@@ -133,34 +136,44 @@ if(empty($_SESSION['user_email']) && empty($_SESSION['name']) && empty($_SESSION
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form method="POST">
+                                            <form method="POST" enctype="multipart/form-data">
                                                 <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="videoTitle" class="form-label">Video Title</label>
-                                                        <input type="text" class="form-control" id="videoTitle"
-                                                            name="videoTitle" required>
-                                                    </div>
+                                                  <div class="mb-3">
+                                                    <label for="tablename" class="form-label">Table Name Title</label>
+                                                    <?php
+                                                    $tables = [];
+                                                    $result = $db->query("SHOW TABLES");
+                                                    if ($result) {
+                                                        while ($row = $result->fetch_array()) {
+                                                            $tables[] = $row[0];
+                                                        }
+                                                    }
+                                                    $db->close();
+                                                    ?>
+                                                    <select class="form-control" id="tablename" name="tablename" required>
+                                                        <option value="">Select Table</option>
+                                                        <?php foreach ($tables as $table): ?>
+                                                            <?php if (strtolower($table) !== 'admins'): // admin table ko skip karenge ?>
+                                                                <option value="<?php echo htmlspecialchars($table); ?>">
+                                                                    <?php echo htmlspecialchars($table); ?>
+                                                                </option>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+
 
                                                     <div class="mb-3">
-                                                        <label for="PublishedDate" class="form-label">Published
-                                                            On</label>
-                                                        <input type="date" name="PublishedDate" id="PublishedDate"
+                                                        <label for="filecsv" class="form-label">file in csv</label>
+                                                        <input type="file" name="filecsv" id="filecsv"
                                                             class="form-control" required>
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="videoIframe" class="form-label">Video Iframe
-                                                            Code</label>
-                                                        <textarea class="form-control" id="videoIframe"
-                                                            name="videoIframe" rows="4"
-                                                            placeholder="Paste iframe embed code here..."
-                                                            required></textarea>
-                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save Video</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -175,70 +188,34 @@ if(empty($_SESSION['user_email']) && empty($_SESSION['name']) && empty($_SESSION
                                         <thead class="table-light">
                                             <tr>
                                                 <th>#</th>
-                                                <th>Title</th>
-                                                <th>Published On</th>
-                                                <th>Content</th>
-                                                <th>Action</th>
+                                                <th>TABLE</th>
+                                                <th>DOWNLOAD SAMPLE FILE</th>
+                                                <th>Download all data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Karur Vysya Bank Executive Notification 2025|| Latest Update</td>
-                                                <td>
-                                                    5th Aug 2025 </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#contentModal_1">
-                                                        View Content
-                                                    </button>
-                                                </td>
-                                                <td class="d-flex gap-2">
-                                                    <button type="button" class="btn btn-sm btn-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal_1">
-                                                        Edit
-                                                    </button>
-                                                    <form method="post" onsubmit="return confirm('Delete this video?');"
-                                                        style="display: inline;">
-                                                        <input type="hidden" name="videos_id"
-                                                            value="eCtEbzROeVlvWTFFMTR3dCt6bjZPOGxEMWtoM25GbDVMS255K0Y3QnQ5az0=">
-                                                        <input type="hidden" name="csrf_token"
-                                                            value="e49ebd37dfe6f654ebc0dc0391489670991d3640cef2e934d401181afd2a88a2">
-                                                        <input type="hidden" name="action" value="delete_videos">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Build a Full-Stack MERN Job Portal | React, Node.js, MongoDB,
-                                                    Express</td>
-                                                <td>
-                                                    6th Aug 2025 </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#contentModal_2">
-                                                        View Content
-                                                    </button>
-                                                </td>
-                                                <td class="d-flex gap-2">
-                                                    <button type="button" class="btn btn-sm btn-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal_2">
-                                                        Edit
-                                                    </button>
-                                                    <form method="post" onsubmit="return confirm('Delete this video?');"
-                                                        style="display: inline;">
-                                                        <input type="hidden" name="videos_id"
-                                                            value="TlRtRy90eVJCSmMxWk9qWVBiQ2NyV3dPdWltSENkR09Kd3FJUnBwMlNoST0=">
-                                                        <input type="hidden" name="csrf_token"
-                                                            value="e49ebd37dfe6f654ebc0dc0391489670991d3640cef2e934d401181afd2a88a2">
-                                                        <input type="hidden" name="action" value="delete_videos">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <?php
+                                        include 'include/dbconn.php';
+                                        $tables = [];
+                                        $result = $db->query("SHOW TABLES");
+                                        if ($result) {
+                                            $i = 1;
+                                            while ($row = $result->fetch_array()) {
+                                                $table = $row[0];
+                                                if (strtolower($table) === 'admins') continue; // skip admin table
+                                                echo "<tr>";
+                                                echo "<td>{$i}</td>";
+                                                echo "<td>" . htmlspecialchars($table) . "</td>";
+                                                // Download sample file (CSV header only)
+                                                echo "<td><a href='download_sample.php?table=" . urlencode($table) . "' class='btn btn-sm btn-info'>Sample CSV</a></td>";
+                                                // Download all data
+                                                echo "<td><a href='download_all.php?table=" . urlencode($table) . "' class='btn btn-sm btn-success'>Download All</a></td>";
+                                                echo "</tr>";
+                                                $i++;
+                                            }
+                                        }
+                                        $db->close();
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -301,197 +278,9 @@ if(empty($_SESSION['user_email']) && empty($_SESSION['name']) && empty($_SESSION
                     </div>
 
                     <!-- Edit Video Modals -->
-                    <div class="modal fade" id="editModal_1" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Video</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <form method="POST">
-                                    <div class="modal-body">
-                                        <input type="hidden" name="csrf_token"
-                                            value="e49ebd37dfe6f654ebc0dc0391489670991d3640cef2e934d401181afd2a88a2">
-                                        <input type="hidden" name="action" value="edit_video">
-                                        <input type="hidden" name="video_id"
-                                            value="QnRaTEkvMEVNTC9SNy83M3JXN25FZDhlRHBGSGVoSThqR3hWOVkzZFROdz0=">
+                 
 
-                                        <div class="mb-3">
-                                            <label for="videoTitle_1" class="form-label">Video Title</label>
-                                            <input type="text" class="form-control video-title-edit" id="videoTitle_1"
-                                                name="videoTitle"
-                                                value="Karur Vysya Bank Executive Notification 2025|| Latest Update"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="PublishedDate_1" class="form-label">Published On</label>
-                                            <input type="date" name="PublishedDate" id="PublishedDate_1"
-                                                class="form-control" value="2025-08-05" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="videoIframe_1" class="form-label">Video Iframe Code</label>
-                                            <textarea class="form-control video-iframe-edit" id="videoIframe_1"
-                                                name="videoIframe" rows="4"
-                                                placeholder="Paste iframe embed code here..."
-                                                required>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/htaMGrBl8v4?si=iR24U9cBq-qI1LgE&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen&gt;&lt;/iframe&gt;</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Update Video</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="editModal_2" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Video</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <form method="POST">
-                                    <div class="modal-body">
-                                        <input type="hidden" name="csrf_token"
-                                            value="e49ebd37dfe6f654ebc0dc0391489670991d3640cef2e934d401181afd2a88a2">
-                                        <input type="hidden" name="action" value="edit_video">
-                                        <input type="hidden" name="video_id"
-                                            value="QmpPTS9RUTQ1VURrMGtDRG05NXl0cFJsMEtsWlJYS2dKOXRETklnL2dtbz0=">
-
-                                        <div class="mb-3">
-                                            <label for="videoTitle_2" class="form-label">Video Title</label>
-                                            <input type="text" class="form-control video-title-edit" id="videoTitle_2"
-                                                name="videoTitle"
-                                                value="Build a Full-Stack MERN Job Portal | React, Node.js, MongoDB, Express"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="PublishedDate_2" class="form-label">Published On</label>
-                                            <input type="date" name="PublishedDate" id="PublishedDate_2"
-                                                class="form-control" value="2025-08-06" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="videoIframe_2" class="form-label">Video Iframe Code</label>
-                                            <textarea class="form-control video-iframe-edit" id="videoIframe_2"
-                                                name="videoIframe" rows="4"
-                                                placeholder="Paste iframe embed code here..."
-                                                required>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Z_SOG82eRiE?si=z6X7XMxpIzFkg2Y0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen&gt;&lt;/iframe&gt;</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Update Video</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                        // Add Video - Auto-fill title from YouTube
-                        document.getElementById('videoIframe').addEventListener('blur', function () {
-                            const iframeCode = this.value;
-                            const srcMatch = iframeCode.match(/src="([^"]+)"/);
-
-                            if (srcMatch && srcMatch[1].includes("youtube.com")) {
-                                const embedUrl = srcMatch[1];
-
-                                // Extract Video ID from embed URL
-                                const videoIdMatch = embedUrl.match(/\/embed\/([^\?&"]+)/);
-                                if (!videoIdMatch) {
-                                    alert('Could not extract video ID from iframe URL.');
-                                    return;
-                                }
-
-                                const videoId = videoIdMatch[1];
-                                const youtubeWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-                                // Call oEmbed API with proper watch URL
-                                fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeWatchUrl)}&format=json`)
-                                    .then(response => {
-                                        if (!response.ok) throw new Error("Invalid YouTube video");
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        document.getElementById('videoTitle').value = data.title;
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching video title:', error);
-                                        alert('Failed to fetch video title. Please check the iframe code.');
-                                    });
-                            } else {
-                                alert("Only YouTube iframe embed is supported.");
-                            }
-                        });
-
-                        // Edit Video - Auto-fill title from YouTube for edit modals
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Handle edit video iframe changes
-                            document.querySelectorAll('.video-iframe-edit').forEach(function (element) {
-                                element.addEventListener('blur', function () {
-                                    const iframeCode = this.value;
-                                    const srcMatch = iframeCode.match(/src="([^"]+)"/);
-
-                                    if (srcMatch && srcMatch[1].includes("youtube.com")) {
-                                        const embedUrl = srcMatch[1];
-
-                                        // Extract Video ID from embed URL
-                                        const videoIdMatch = embedUrl.match(/\/embed\/([^\?&"]+)/);
-                                        if (!videoIdMatch) {
-                                            alert('Could not extract video ID from iframe URL.');
-                                            return;
-                                        }
-
-                                        const videoId = videoIdMatch[1];
-                                        const youtubeWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-                                        // Find corresponding title input
-                                        const modalId = this.id.split('_')[1];
-                                        const titleInput = document.getElementById('videoTitle_' + modalId);
-
-                                        // Call oEmbed API with proper watch URL
-                                        fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeWatchUrl)}&format=json`)
-                                            .then(response => {
-                                                if (!response.ok) throw new Error("Invalid YouTube video");
-                                                return response.json();
-                                            })
-                                            .then(data => {
-                                                if (titleInput) {
-                                                    titleInput.value = data.title;
-                                                }
-                                            })
-                                            .catch(error => {
-                                                console.error('Error fetching video title:', error);
-                                                alert('Failed to fetch video title. Please check the iframe code.');
-                                            });
-                                    } else {
-                                        alert("Only YouTube iframe embed is supported.");
-                                    }
-                                });
-                            });
-
-                            // Set today's date for add video modal
-                            const today = new Date();
-                            const yyyy = today.getFullYear();
-                            const mm = String(today.getMonth() + 1).padStart(2, '0');
-                            const dd = String(today.getDate()).padStart(2, '0');
-                            const formattedDate = `${yyyy}-${mm}-${dd}`;
-
-                            const publishedDateInput = document.getElementById("PublishedDate");
-                            if (publishedDateInput) {
-                                publishedDateInput.value = formattedDate;
-                            }
-                        });
-                    </script>
+                
 
                     <!-- Footer -->
                     <?php include('include/footer.php') ?>
@@ -547,3 +336,56 @@ if(empty($_SESSION['user_email']) && empty($_SESSION['name']) && empty($_SESSION
 </body>
 
 </html>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['filecsv']) && isset($_POST['tablename'])) {
+    include 'include/dbconn.php'; 
+
+    $table = $_POST['tablename'];
+    $file = $_FILES['filecsv']['tmp_name'];
+
+    try {
+        if (($handle = fopen($file, "r")) !== FALSE) {
+            $columns = fgetcsv($handle);
+            if (!$columns) throw new Exception("CSV file is empty or invalid.");
+
+            $colList = implode('`,`', array_map('trim', $columns));
+            $rowCount = 0;
+            while (($data = fgetcsv($handle)) !== FALSE) {
+                $escaped = array_map(function($v) use ($db) {
+                    return "'" . $db->real_escape_string($v) . "'";
+                }, $data);
+                $singleInsert = "INSERT INTO `$table` (`$colList`) VALUES (" . implode(',', $escaped) . ")";
+                if (!$db->query($singleInsert)) {
+                    throw new Exception("Insert failed at row $rowCount: " . $db->error);
+                }
+                $rowCount++;
+            }
+            fclose($handle);
+
+            // Move uploaded file to ../storage
+            $storageDir = dirname(__DIR__) . '/storage/';
+            if (!is_dir($storageDir)) {
+                mkdir($storageDir, 0777, true);
+            }
+            $targetPath = $storageDir . basename($_FILES['filecsv']['name']);
+            if (move_uploaded_file($_FILES['filecsv']['tmp_name'], $targetPath)) {
+                // File moved successfully
+            } else {
+                // File move failed (optional: show error or log)
+            }
+
+            if ($rowCount > 0) {
+                echo "<script>Swal.fire('Success','$rowCount rows imported successfully!','success');</script>";
+            } else {
+                throw new Exception("No data rows found in CSV.");
+            }
+        } else {
+            throw new Exception("Unable to open CSV file.");
+        }
+    } catch (Exception $e) {
+        echo "<script>Swal.fire('Error','" . addslashes($e->getMessage()) . "','error');</script>";
+    }
+    $db->close();
+}
+?>
