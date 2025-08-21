@@ -160,20 +160,8 @@
       color: #ffffff;
       background-color: #2d5f91;
     }
-
     .nav-tabs .nav-link {
       border-radius: 5px;
-    }
-
-    .ap-ar-tabs {
-      position: absolute;
-      right: 10px;
-    }
-
-    .ap-ar-tabs .nav-link {
-      padding: 5px;
-      height: 30px;
-      line-height: 10px;
     }
 
     @media (max-width: 991.98px) {
